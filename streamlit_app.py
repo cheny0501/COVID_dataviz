@@ -7,23 +7,18 @@ import streamlit as st
 
 @st.cache_data
 def load_data():
-    cancer_df = pd.read_csv("https://raw.githubusercontent.com/hms-dbmi/bmi706-2022/main/cancer_data/cancer_ICD10.csv").melt(  # type: ignore
-        id_vars=["Country", "Year", "Cancer", "Sex"],
-        var_name="Age",
-        value_name="Deaths",
-    )
-    pop_df = pd.read_csv("https://raw.githubusercontent.com/hms-dbmi/bmi706-2022/main/cancer_data/population.csv").melt(  # type: ignore
-        id_vars=["Country", "Year", "Sex"],
-        var_name="Age",
-        value_name="Pop",
-    )
-    df = pd.merge(left=cancer_df, right=pop_df, how="left")
-    df["Pop"] = df.groupby(["Country", "Sex", "Age"])["Pop"].fillna(method="bfill")
-    df.dropna(inplace=True)
+    df1 = pd.read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-2021.csv")
+    df_vac = pd.read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/us_state_vaccinations.csv")
     
-    df = df.groupby(["Country", "Year", "Cancer", "Age", "Sex"]).sum().reset_index()
-    df["Rate"] = df["Deaths"] / df["Pop"] * 100_000
-
+    # start from 2021-01-12
+    df1 = df1[df1['date'] > '2021-01-11']
+    # groupby cases and deaths for same date
+    df1 = df1.groupby(['date','state']).agg({'cases': 'sum', 'deaths': 'sum'})
+    df_vac = df_vac[[ "date", "location","total_vaccinations", "total_vaccinations_per_hundred" ]]
+    df_vac = df_vac.rename(columns={"location": "state"})
+    df_new = df1.merge(df_vac, on=['date', 'state'], how='left')
+    df_new.dropna(inplace=True)
+    df["date"] = pd.to_datetime(df["date"]).astype(int) / 10**9 
     return df
 
 
@@ -33,13 +28,13 @@ df = load_data()
 ### P1.2 ###
 
 
-st.write("## Age-specific cancer mortality rates")
+st.write("## Geographical Distribution")
 
 ### P2.1 ###
 
 # replace with st.slider
-year = st.slider("Year", int(df["Year"].min()), int(df["Year"].max()), 2012)
-subset = df[df["Year"] == year]
+date = st.slider("date", int(df["date"].min()), int(df["date"].max()), int(df["date"].min()))
+subset = df[df["date"] == date]
 ### P2.1 ###
 
 
