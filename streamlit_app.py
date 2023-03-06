@@ -2,8 +2,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-### P1.2 ###
-
+# Data pre-processing
 
 @st.cache_data
 def load_data():
@@ -21,16 +20,16 @@ def load_data():
     df["date"] = pd.to_datetime(df["date"]).astype(int) / 10**9 
     return df
 
-
-# Uncomment the next line when finished
 df = load_data()
 
-### P1.2 ###
-
+### Title ###
 
 st.write("## Geographical Distribution")
+st.write("### Group: Viz or DY")
 
-### P2.1 ###
+### Task 1 ###
+
+st.write("### What’s the trend of COVID-19 cases and deaths over time in the US?")
 
 # replace with st.slider
 date = st.slider("date", int(df["date"].min()), int(df["date"].max()), int(df["date"].min()))
