@@ -77,18 +77,11 @@ st.altair_chart(chart, use_container_width=True)
 
 st.write("Task 2")
 
-# create a drop-down cancer selector
+# Create the drop-down cancer selector
 state = df_wide['state'].unique()
 state_dropdown = st.selectbox('Select a state', options=state)
 
-
-
-state_dropdown = alt.binding_select(options=state)
-state_select = alt.selection_single(
-    fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'}
-)
-
-
+# Create the base chart
 base = alt.Chart(df_wide).properties(
     width=650
 ).encode(
@@ -99,39 +92,16 @@ base = alt.Chart(df_wide).properties(
     title='Case Fatality rate across states'
 )
 
-
-base_2 = alt.Chart(df_wide).properties(
-    width=550
-).encode(
-  x='date:T',
-  y='total_vaccinations',
-  color='state'
-).properties(
-    title='Vaccinations across states??????????'
-)
-
-########################
-# add the drop-down selection to the chart 
-
-# add your code here
+# Add the drop-down selection to the chart
 chart = base.add_selection(
-    state_select
+    alt.selection_single(fields=['state'], bind=state_dropdown, name="state", init={'state': 'Alabama'})
 ).transform_filter(
-    state_select
+    alt.datum.state == state_dropdown
 )
 
-chart_2 = base_2.add_selection(
-    state_select
-).transform_filter(
-    state_select
-)
-
-
-########################
-# add brush
+# Add brush
 brush = alt.selection_interval(encodings=['x'])
 
-# add your code here
 upper = chart.mark_line(point=True).encode(
     alt.X('date:T',scale=alt.Scale(domain=brush)),
     y = 'case_fatality_rate:Q',
@@ -140,15 +110,22 @@ upper = chart.mark_line(point=True).encode(
     brush
 )
 
-# add your code here
-lower = chart_2.add_selection(
+lower = alt.Chart(df_wide).properties(
+    width=650, height=50
+).encode(
+  x='date:T',
+  y='total_vaccinations',
+  color='state'
+).properties(
+    title='Vaccinations across states'
+).add_selection(
+    brush
+).transform_filter(
     brush
 ).mark_bar()
 
-lower = lower.properties(
-    height=50
-)
-
 chart1 = upper & lower
+
+# Display the chart
 st.altair_chart(chart1)
 
