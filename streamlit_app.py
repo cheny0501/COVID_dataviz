@@ -78,15 +78,13 @@ st.altair_chart(chart, use_container_width=True)
 st.write("Task 2")
 
 # create a drop-down cancer selector
-cancer = st.selectbox("State",df_wide['state'].unique())
-subset = df_wide[df_wide["state"] == cancer]
+state = st.selectbox("State",df_wide['state'].unique())
+subset = df_wide[df_wide["state"] == state]
 
 
 
-state_dropdown = alt.binding_select(options=state)
-state_select = alt.selection_single(
-    fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'}
-)
+#state_dropdown = alt.binding_select(options=state)
+#state_select = alt.selection_single(fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'})
 
 
 base = alt.Chart(subset).properties(
