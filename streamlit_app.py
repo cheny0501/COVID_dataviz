@@ -131,3 +131,26 @@ lower = lower.properties(
 chart1 = upper & lower
 st.altair_chart(chart1)
 
+### Task 3&4 ###
+
+st.write("### How does COVID-19’s geographical distribution regarding cases and deaths differ among states? How do the vaccination statuses vary among states?")
+
+# replace with st.slider
+date = st.slider("date", int(df_long["date"].min()), int(df_long["date"].max()), int(df_long["date"].min()))
+subset = df_long[df_long["date"] == date]
+
+### P2.2 ###
+# replace with st.radio
+selection = st.radio("selection", ("cases", "deaths","total_vaccinations","total_vaccinations_per_hundred","case_fatality_rate"))
+subset = subset[subset["selection"] == selection]
+
+
+### P2.3 ###
+# replace with st.multiselect
+default = [
+    "California",
+    "Gerogia",
+]
+states = st.multiselect('states', subset["states"].unique(), default)
+subset = subset[subset["states"].isin(states)]
+
