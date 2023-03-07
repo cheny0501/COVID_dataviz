@@ -62,7 +62,7 @@ st.write("#### Tony Ding, Chen Yang")
 st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time in the US?")
 
 # Create the chart
-chart = alt.Chart(df).mark_line().encode(
+chart = alt.Chart(task1_df).mark_line().encode(
     x="date:T",
     y="value:Q",
     color="selection:N",
