@@ -77,12 +77,19 @@ st.altair_chart(chart, use_container_width=True)
 
 st.write("Task 2")
 
-# Create the drop-down cancer selector
-state = df_wide['state'].unique()
-state_dropdown = st.selectbox('Select a state', options=state)
+# create a drop-down cancer selector
+cancer = st.selectbox("State",df_wide['state'].unique())
+subset = df_wide[df_wide["state"] == cancer]
 
-# Create the base chart
-base = alt.Chart(df_wide).properties(
+
+
+state_dropdown = alt.binding_select(options=state)
+state_select = alt.selection_single(
+    fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'}
+)
+
+
+base = alt.Chart(subset).properties(
     width=650
 ).encode(
   x='date:T',
@@ -92,17 +99,29 @@ base = alt.Chart(df_wide).properties(
     title='Case Fatality rate across states'
 )
 
-# Add the drop-down selection to the chart
-chart = base.add_selection(
-    alt.selection_single(fields=['state'], bind=state_dropdown, name="state", init={'state': 'Alabama'})
-).transform_filter(
-    alt.datum.state == state_dropdown
+
+base_2 = alt.Chart(subset).properties(
+    width=550
+).encode(
+  x='date:T',
+  y='total_vaccinations',
+  color='state'
+).properties(
+    title='Vaccinations across states??????????'
 )
 
-# Add brush
+########################
+# P2.1 add the drop-down selection to the chart 
+
+
+
+
+########################
+# p2.3 add brush
 brush = alt.selection_interval(encodings=['x'])
 
-upper = chart.mark_line(point=True).encode(
+# add your code here
+upper = base.mark_line(point=True).encode(
     alt.X('date:T',scale=alt.Scale(domain=brush)),
     y = 'case_fatality_rate:Q',
     color = 'state'
@@ -110,22 +129,15 @@ upper = chart.mark_line(point=True).encode(
     brush
 )
 
-lower = alt.Chart(df_wide).properties(
-    width=650, height=50
-).encode(
-  x='date:T',
-  y='total_vaccinations',
-  color='state'
-).properties(
-    title='Vaccinations across states'
-).add_selection(
-    brush
-).transform_filter(
+# add your code here
+lower = base_2.add_selection(
     brush
 ).mark_bar()
 
-chart1 = upper & lower
+lower = lower.properties(
+    height=50
+)
 
-# Display the chart
+chart1 = upper & lower
 st.altair_chart(chart1)
 
