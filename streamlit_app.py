@@ -57,3 +57,20 @@ task1_df = load_data3()
 st.write("## Visualizing the Impact of COVID-19")
 st.write("#### Group: Viz or DY")
 st.write("#### Tony Ding, Chen Yang")
+
+#### Task1 ###
+st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time in the US?")
+
+# Create the chart
+chart = alt.Chart(df).mark_line().encode(
+    x="date:T",
+    y="value:Q",
+    color="selection:N",
+    row="selection:N",
+    tooltip=["date:T", "value:Q"]
+).resolve_scale(y='independent')
+
+# Render the chart using the altair renderer
+st.altair_chart(chart, use_container_width=True)
+
+
