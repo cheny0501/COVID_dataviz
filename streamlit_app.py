@@ -137,7 +137,7 @@ st.write("### How does COVID-19’s geographical distribution regarding cases an
 
 # replace with st.slider
 df_long['date'] = pd.to_datetime(df_long['date'])
-date = st.slider("date", int(df_long["date"].min()), int(df_long["date"].max()), int(df_long["date"].min()))
+date = st.date_input("Date", min_value=df_long["date"].min(), max_value=df_long["date"].max(), value=df_long["date"].min())
 subset = df_long[df_long["date"] == date]
 
 ### P2.2 ###
