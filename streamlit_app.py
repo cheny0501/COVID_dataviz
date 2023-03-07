@@ -24,7 +24,7 @@ def load_data1():
     # drop all missing values
     df1.dropna(inplace=True)
     # change date type
-    df1["date"] = pd.to_datetime(df1["date"]).astype(int) / 10**9 
+    df1["date"] = pd.to_datetime(df1["date"])
     # Group the data by state and date
     grouped = df1.groupby(['state', 'date'])
     # Calculate the mortality rate for each state and date
