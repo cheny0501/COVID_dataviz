@@ -63,7 +63,7 @@ st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time 
 
 # Create the chart
 chart = alt.Chart(task1_df).mark_line().encode(
-    x=alt.X('date:T', axis=alt.Axis(format='%Y-%m-%d')),
+    x='date:T',
     y="value:Q",
     color="selection:N",
     row="selection:N",
