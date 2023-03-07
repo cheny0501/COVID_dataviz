@@ -51,3 +51,9 @@ def load_data3():
   return task1_df
 
 task1_df = load_data3()    
+
+### Title ###
+
+st.write("## Visualizing the Impact of COVID-19")
+st.write("#### Group: Viz or DY")
+st.write("#### Tony Ding, Chen Yang")
