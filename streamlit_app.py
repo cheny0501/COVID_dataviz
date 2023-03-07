@@ -136,6 +136,7 @@ st.altair_chart(chart1)
 st.write("### How does COVID-19’s geographical distribution regarding cases and deaths differ among states? How do the vaccination statuses vary among states?")
 
 # replace with st.slider
+df_long['date'] = pd.to_datetime(df_long['date'])
 date = st.slider("date", int(df_long["date"].min()), int(df_long["date"].max()), int(df_long["date"].min()))
 subset = df_long[df_long["date"] == date]
 
