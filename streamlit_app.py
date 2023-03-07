@@ -24,13 +24,13 @@ def load_data1():
     # drop all missing values
     df1.dropna(inplace=True)
     # change date type
-    df1["date"] = pd.to_datetime(df["date"]).astype(int) / 10**9 
+    df1["date"] = pd.to_datetime(df1["date"]).astype(int) / 10**9 
     # Group the data by state and date
     grouped = df1.groupby(['state', 'date'])
     # Calculate the mortality rate for each state and date
-    mortality_rates = (grouped['deaths'].sum() / grouped['cases'].sum()) * 100
+    case_fatality_rate = (grouped['deaths'].sum() / grouped['cases'].sum()) * 100
     # Add the mortality rates as a new column to the original DataFrame
-    df1['case_fatality_rate'] = df1.set_index(['state', 'date']).index.map(mortality_rates.get)
+    df1['case_fatality_rate'] = df1.set_index(['state', 'date']).index.map(case_fatality_rate.get)
     df_wide = df1
     
     return df_wide
@@ -40,7 +40,7 @@ df_wide = load_data1()
 @st.cache_data
 def load_data2():
 # change df to long
-    df_long = df1.melt(id_vars=['date', 'state'], value_vars=['cases', 'deaths', 'total_vaccinations', 'total_vaccinations_per_hundred', 'mortality'], var_name='selection')
+    df_long = df_wide.melt(id_vars=['date', 'state'], value_vars=['cases', 'deaths', 'total_vaccinations', 'total_vaccinations_per_hundred', 'case_fatality_rate'], var_name='selection')
     
     return df_long
 
