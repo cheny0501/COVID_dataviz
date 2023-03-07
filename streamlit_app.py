@@ -96,7 +96,7 @@ base = alt.Chart(subset).properties(
 
 
 base_2 = alt.Chart(subset).properties(
-    width=550
+    width=650
 ).encode(
   x='date:T',
   y='total_vaccinations',
@@ -117,9 +117,6 @@ upper = base.mark_line(point=True).encode(
     tooltip = ["date:T","case_fatality_rate:Q"]
 ).transform_filter(
     brush
-).configure_axis(
-    xaxis=alt.Axis(title='Date: Months'),
-    yaxis=alt.Axis(title='Case Fatality Rate'),
 )
 
 # add your code here
@@ -129,9 +126,6 @@ lower = base_2.add_selection(
 
 lower = lower.properties(
     height=50
-).configure_axis(
-    xaxis=alt.Axis(title='Date: Months'),
-    yaxis=alt.Axis(title='Vaccination counts'),
 )
 
 chart1 = upper & lower
