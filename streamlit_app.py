@@ -77,10 +77,8 @@ st.altair_chart(chart, use_container_width=True)
 st.write("Task 2")
 
 # create a drop-down cancer selector
-state = st.selectbox("State",df_wide['state'].unique())
+state = st.selectbox("Please select a state:",df_wide['state'].unique())
 subset = df_wide[df_wide["state"] == state]
-
-
 
 #state_dropdown = alt.binding_select(options=state)
 #state_select = alt.selection_single(fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'})
@@ -93,7 +91,7 @@ base = alt.Chart(subset).properties(
   y='case_fatality_rate',
   color='state'
 ).properties(
-    title='Case Fatality rate across states'
+    title='Case Fatality rate over the year of 2021'
 )
 
 
@@ -104,26 +102,24 @@ base_2 = alt.Chart(subset).properties(
   y='total_vaccinations',
   color='state'
 ).properties(
-    title='Vaccinations across states??????????'
+    title='Total Vaccinations over the year of 2021'
 )
 
 ########################
-# P2.1 add the drop-down selection to the chart 
-
-
-
-
-########################
-# p2.3 add brush
+# add brush
 brush = alt.selection_interval(encodings=['x'])
 
 # add your code here
 upper = base.mark_line(point=True).encode(
     alt.X('date:T',scale=alt.Scale(domain=brush)),
     y = 'case_fatality_rate:Q',
-    color = 'state'
+    color = 'state',
+    tooltip = ["date:T","case_fatality_rate:Q"]
 ).transform_filter(
     brush
+).configure_axis(
+    xaxis=alt.Axis(title='Date: Months'),
+    yaxis=alt.Axis(title='Case Fatality Rate'),
 )
 
 # add your code here
@@ -133,8 +129,12 @@ lower = base_2.add_selection(
 
 lower = lower.properties(
     height=50
+).configure_axis(
+    xaxis=alt.Axis(title='Date: Months'),
+    yaxis=alt.Axis(title='Vaccination counts'),
 )
 
 chart1 = upper & lower
 st.altair_chart(chart1)
+
 
