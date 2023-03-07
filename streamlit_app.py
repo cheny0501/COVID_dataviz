@@ -72,9 +72,9 @@ chart = alt.Chart(task1_df).mark_line().encode(
 # Render the chart using the altair renderer
 st.altair_chart(chart, use_container_width=True)
 
-#### Task2 ###
+#### Task2 ####
 
-st.write("Task 2")
+st.write("Task 2: ??????????")
 
 # create a drop-down cancer selector
 state = st.selectbox("Please select a state:",df_wide['state'].unique())
@@ -87,8 +87,8 @@ subset = df_wide[df_wide["state"] == state]
 base = alt.Chart(subset).properties(
     width=650
 ).encode(
-  x='date:T',
-  y='case_fatality_rate',
+  x=alt.X('date:T', axis=alt.Axis(title='Date')),
+  y=alt.Y('case_fatality_rate',axis=alt.Axis(title='Case Fatality Rate')),
   color='state'
 ).properties(
     title='Case Fatality rate over the year of 2021'
@@ -98,8 +98,8 @@ base = alt.Chart(subset).properties(
 base_2 = alt.Chart(subset).properties(
     width=650
 ).encode(
-  x='date:T',
-  y='total_vaccinations',
+  x=alt.X('date:T', axis=alt.Axis(title='Date')),
+  y=alt.Y('total_vaccinations:Q', axis=alt.Axis(title='Total Vaccinations')),
   color='state'
 ).properties(
     title='Total Vaccinations over the year of 2021'
@@ -111,8 +111,8 @@ brush = alt.selection_interval(encodings=['x'])
 
 # add your code here
 upper = base.mark_line(point=True).encode(
-    alt.X('date:T',scale=alt.Scale(domain=brush)),
-    y = 'case_fatality_rate:Q',
+    alt.X('date:T',scale=alt.Scale(domain=brush),axis=alt.Axis(title='Date')),
+    y =alt.Y('case_fatality_rate:Q',axis=alt.Axis(title='Case Fatality Rate')),
     color = 'state',
     tooltip = ["date:T","case_fatality_rate:Q"]
 ).transform_filter(
@@ -130,5 +130,4 @@ lower = lower.properties(
 
 chart1 = upper & lower
 st.altair_chart(chart1)
-
 
