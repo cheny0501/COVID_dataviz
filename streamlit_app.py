@@ -155,3 +155,9 @@ default = [
 states = st.multiselect('states', subset["states"].unique(), default)
 subset = subset[subset["states"].isin(states)]
 
+chart = alt.Chart(subset).mark_rect().encode(
+    x=alt.X("date:T"),
+    y=alt.Y("states:N"),
+    color=alt.Color("case_fatality_rate", legend=alt.Legend(title="case_fatality_rate")),
+    tooltip=["case_fatality_rate"],
+)
