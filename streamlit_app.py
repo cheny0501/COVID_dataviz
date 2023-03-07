@@ -83,7 +83,7 @@ state_dropdown = st.selectbox('Select a state', options=state)
 
 
 
-#state_dropdown = alt.binding_select(options=state)
+state_dropdown = alt.binding_select(options=state)
 state_select = alt.selection_single(
     fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'}
 )
@@ -111,7 +111,7 @@ base_2 = alt.Chart(df_wide).properties(
 )
 
 ########################
-# P2.1 add the drop-down selection to the chart 
+# add the drop-down selection to the chart 
 
 # add your code here
 chart = base.add_selection(
@@ -128,7 +128,7 @@ chart_2 = base_2.add_selection(
 
 
 ########################
-# p2.3 add brush
+# add brush
 brush = alt.selection_interval(encodings=['x'])
 
 # add your code here
