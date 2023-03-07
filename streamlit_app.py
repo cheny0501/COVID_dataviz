@@ -60,7 +60,6 @@ st.write("#### Tony Ding, Chen Yang")
 
 #### Task1 ###
 st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time in the US?")
-task1_df['date'] = pd.to_datetime(task1_df['date'])
 # Create the chart
 chart = alt.Chart(task1_df).mark_line().encode(
     x='date:T',
