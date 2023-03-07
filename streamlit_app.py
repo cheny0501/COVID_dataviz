@@ -2,14 +2,14 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-# Data pre-processing
+# Data pre-processing and load data
 
 @st.cache_data
 def load_data1():
     # read data
     df_case = pd.read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-2021.csv")
     df_vac = pd.read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/us_state_vaccinations.csv")
-    
+  
     # start from 2021-01-12
     # since the record for df_vac began from 2021-01-12
     df_case = df_case[df_case['date'] > '2021-01-11']
@@ -37,7 +37,6 @@ def load_data1():
 
 df_wide = load_data1()
 
-@st.cache_data
 def load_data2():
 # change df to long
     df_long = df_wide.melt(id_vars=['date', 'state'], value_vars=['cases', 'deaths', 'total_vaccinations', 'total_vaccinations_per_hundred', 'case_fatality_rate'], var_name='selection')
@@ -74,16 +73,15 @@ st.altair_chart(chart, use_container_width=True)
 
 #### Task2 ####
 
-st.write("Task 2: ??????????")
-
-# create a drop-down cancer selector
+st.write("#### Task2: How do vaccinations administered total/per state/per region impact the spread of COVID-19?")
+# create a drop-down state selector
 state = st.selectbox("Please select a state:",df_wide['state'].unique())
 subset = df_wide[df_wide["state"] == state]
 
 #state_dropdown = alt.binding_select(options=state)
 #state_select = alt.selection_single(fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'})
 
-
+# case fatality rate over the year of 2021
 base = alt.Chart(subset).properties(
     width=650
 ).encode(
@@ -94,7 +92,7 @@ base = alt.Chart(subset).properties(
     title='Case Fatality rate over the year of 2021'
 )
 
-
+# base for total Vaccinations over 2021
 base_2 = alt.Chart(subset).properties(
     width=650
 ).encode(
@@ -105,11 +103,9 @@ base_2 = alt.Chart(subset).properties(
     title='Total Vaccinations over the year of 2021'
 )
 
-########################
 # add brush
 brush = alt.selection_interval(encodings=['x'])
 
-# add your code here
 upper = base.mark_line(point=True).encode(
     alt.X('date:T',scale=alt.Scale(domain=brush),axis=alt.Axis(title='Date')),
     y =alt.Y('case_fatality_rate:Q',axis=alt.Axis(title='Case Fatality Rate')),
@@ -119,7 +115,6 @@ upper = base.mark_line(point=True).encode(
     brush
 )
 
-# add your code here
 lower = base_2.add_selection(
     brush
 ).mark_bar()
@@ -131,14 +126,14 @@ lower = lower.properties(
 chart1 = upper & lower
 st.altair_chart(chart1)
 
-### Task 3&4 ###
+### Task 3 & 4 ###
 
 st.write("### How does COVID-19’s geographical distribution regarding cases and deaths differ among states? How do the vaccination statuses vary among states?")
 
 # replace with st.slider
-df_long['date'] = pd.to_datetime(df_long['date'])
-date = st.date_input("Date", min_value=df_long["date"].min(), max_value=df_long["date"].max(), value=df_long["date"].min())
-subset = df_long[df_long["date"] == date]
+df_wide['date'] = pd.to_datetime(df_wide['date'])
+date = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
+subset = df_wide[df_wide["date"] == date]
 
 ### P2.2 ###
 # replace with st.radio
