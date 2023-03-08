@@ -173,7 +173,7 @@ start_time = st.slider(
 
 subset = df_wide[df_wide["date"] == start_time]
 
-#st.write("You are viewing the data for this date: ", start_time)
+st.write("Click to select a state. Double click to de-select the state.")
 
 width = 600
 height  = 300
