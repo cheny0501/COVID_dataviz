@@ -156,9 +156,9 @@ st.altair_chart(chart1)
 st.write("### How does COVID-19’s geographical distribution regarding cases and deaths differ among states? How do the vaccination statuses vary among states?")
 
 # replace with st.slider
-df_wide['date'] = pd.to_datetime(df_wide['date'])
-date = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
-subset = df_wide[df_wide["date"] == date]
+#df_wide['date'] = pd.to_datetime(df_wide['date'])
+#date = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
+#subset = df_wide[df_wide["date"] == date]
 
 width = 600
 height  = 300
@@ -186,12 +186,12 @@ chart_base = alt.Chart(source
     ).add_selection(selector
     ).transform_lookup(
         lookup="id",
-        from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
+        from_=alt.LookupData(df_wide, "id", ['case_fatality_rate','state','date','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
     )
 
-rate_scale = alt.Scale(domain=[subset['case_fatality_rate'].max(), subset['case_fatality_rate'].min()], scheme='inferno')
+rate_scale = alt.Scale(domain=[df_wide['case_fatality_rate'].max(), df_wide['case_fatality_rate'].min()], scheme='inferno')
 rate_color = alt.Color(field="case_fatality_rate", type="quantitative", scale=rate_scale)
-vac_scale = alt.Scale(domain=[subset['total_vaccinations_per_hundred'].max(), subset['total_vaccinations_per_hundred'].min()], scheme='Viridis')
+vac_scale = alt.Scale(domain=[df_wide['total_vaccinations_per_hundred'].max(), df_wide['total_vaccinations_per_hundred'].min()], scheme='Viridis')
 vac_color = alt.Color(field="total_vaccinations_per_hundred", type="quantitative", scale=vac_scale)
 
 chart_rate = chart_base.mark_geoshape().encode(
