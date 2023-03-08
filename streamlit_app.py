@@ -209,7 +209,7 @@ chart_base = alt.Chart(source
 rate_scale = alt.Scale(domain=[df_wide['case_fatality_rate'].max(), df_wide['case_fatality_rate'].min()], scheme='inferno')
 rate_color = alt.Color(field="case_fatality_rate", type="quantitative", scale=rate_scale)
 vac_scale = alt.Scale(domain=[df_wide['total_vaccinations_per_hundred'].max(), df_wide['total_vaccinations_per_hundred'].min()], scheme='Viridis')
-vac_color = alt.Color(field="total_vaccinations_per_hundred", type="quantitative", scale=vac_scale)
+vac_color = alt.Color(field="total_vaccinations_per_hundred", type="quantitative", scale=vac_scale,legend=alt.Legend(title='Total Vacc per Hundred'))
 
 chart_rate = chart_base.mark_geoshape().encode(
     color=rate_color,
