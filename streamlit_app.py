@@ -96,7 +96,7 @@ chart = alt.Chart(task1_df).mark_area().encode(
 ).resolve_scale(y='independent')
 
 # Render the chart using the altair renderer
-st.altair_chart(chart, use_container_width=True)
+st.altair_chart(chart)
 
 #### Task2 ####
 
