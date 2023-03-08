@@ -100,7 +100,7 @@ st.altair_chart(chart)
 
 #### Task2 ####
 
-st.write("#### Task2: COVID-19 vaccinations and their impact on case fatality rate in US over the year of 2021")
+st.write("#### COVID-19 vaccinations and their impact on case fatality rate in US over the year of 2021")
 # create a drop-down state selector
 state = st.selectbox("Please select a state:",df_wide['state'].unique())
 subset = df_wide[df_wide["state"] == state]
@@ -175,7 +175,7 @@ subset = df_wide[df_wide["date"] == start_time]
 
 st.write("Click to select a state. Double click to de-select the state.")
 
-width = 600
+width = 650
 height  = 300
 project = 'albersUsa'
 
