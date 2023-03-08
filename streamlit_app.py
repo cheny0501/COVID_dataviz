@@ -5,7 +5,7 @@ from vega_datasets import data
 
 # Data pre-processing and load data
 
-@st.cache_data
+@st.cache
 def load_data1():
     # read data
     df_case = pd.read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-2021.csv")
