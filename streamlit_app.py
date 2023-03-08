@@ -175,8 +175,8 @@ subset = df_wide[df_wide["date"] == start_time]
 
 #st.write("You are viewing the data for this date: ", start_time)
 
-width = 600
-height  = 300
+width = 800
+height  = 400
 project = 'albersUsa'
 
 # a gray map using as the visualization background
@@ -189,10 +189,10 @@ background = alt.Chart(source
     height=height
 ).project(project)
 
-selector = alt.selection_multi(
-    #on='click'
+selector = alt.selection_single(
+    on='click'
     #empty='all', fields=['id']
-    fields=["id"]
+    #fields=["id"]
     )
 
 chart_base = alt.Chart(source
