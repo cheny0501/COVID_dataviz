@@ -122,7 +122,6 @@ state = st.multiselect("States",df_wide['state'].unique(),[
     "Georgia",
     "Massachusetts",
     "New York",
-    "Texas",
 ])
 
 subset = df_wide[df_wide["state"].isin(state)]
