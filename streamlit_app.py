@@ -157,6 +157,8 @@ st.altair_chart(chart1)
 
 ### Task 3 & 4 ###
 
+from datetime import datetime
+
 st.write("### How does COVID-19’s geographical distribution regarding cases and deaths differ among states? How do the vaccination statuses vary among states?")
 
 # replace with st.slider
@@ -166,9 +168,11 @@ subset = df_wide[df_wide["date"] == date_selection]
 
 start_time = st.slider(
     "When do you start?",
-    value=datetime(2021, 1, 12, 9, 30),
+    min_value = datetime(2021,1,12,9,30),
     max_value = datetime(2021,12,30,23,59),
+    value=datetime(2021, 1, 12, 9, 30),
     format="MM/DD/YY - hh:mm")
+
 st.write("Start time:", start_time)
 
 width = 600
