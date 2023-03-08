@@ -109,7 +109,7 @@ state = st.multiselect("States",df_wide['state'].unique(),[
     "Florida",
 ])
 
-subset = df_wide[df_wide["state"] == state]
+subset = df_wide[df_wide["state"].isin(state)]
 
 #state_dropdown = alt.binding_select(options=state)
 #state_select = alt.selection_single(fields=['state'], bind=state_dropdown, name="state",init={'state':'Alabama'})
