@@ -80,7 +80,7 @@ source = load_data3()
 
 st.write("## Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021")
 st.write("#### Group: Viz or DY")
-st.write("#### Tony Ding, Chen Yang")
+st.write("#### Members: Tony Ding, Chen Yang")
 
 #### Task1 ###
 st.write("#### The trend of COVID-19 cases and deaths in the US over the year of 2021")
