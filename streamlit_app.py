@@ -190,8 +190,9 @@ background = alt.Chart(source
 ).project(project)
 
 selector = alt.selection_multi(
-    on='click'
+    #on='click'
     #empty='all', fields=['id']
+    fields=["id"]
     )
 
 chart_base = alt.Chart(source
