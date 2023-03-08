@@ -89,10 +89,10 @@ chart = alt.Chart(df_task1).mark_area(color = 'green',
                            opacity = 0.5,
                            line = {'color':'darkgreen'}).encode(
     x='date:T',
-    y="value:Q",
+    y="count:Q",
     color="selection:N",
     row="selection:N",
-    tooltip=["date:T", "value:Q"]
+    tooltip=["date:T", "count:Q"]
 ).resolve_scale(y='independent')
 
 # Render the chart using the altair renderer
