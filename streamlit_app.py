@@ -13,7 +13,7 @@ def load_data1():
     df_case = pd.read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-2021.csv")
     df_vac = pd.read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/us_state_vaccinations.csv")
     # groupby cases and deaths for same date
-    df_task1 = df_task1.groupby(['date']).agg({'cases': 'sum', 'deaths': 'sum'})
+    df_task1 = df_case.groupby(['date']).agg({'cases': 'sum', 'deaths': 'sum'})
     df_task1 = df_task1.reset_index()
     df_task1 = df_task1.melt(id_vars=['date'], value_vars=['cases', 'deaths'], var_name='selection', value_name='value')
     
