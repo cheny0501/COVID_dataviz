@@ -15,7 +15,7 @@ def load_data1():
     # groupby cases and deaths for same date
     df_task1 = df_case.groupby(['date']).agg({'cases': 'sum', 'deaths': 'sum'})
     df_task1 = df_task1.reset_index()
-    df_task1 = df_task1.melt(id_vars=['date'], value_vars=['cases', 'deaths'], var_name='selection', value_name='value')
+    df_task1 = df_task1.melt(id_vars=['date'], value_vars=['cases', 'deaths'], var_name='selection', value_name='count')
     
     return df_task1
 
