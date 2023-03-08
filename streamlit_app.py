@@ -67,7 +67,14 @@ def load_data3():
   task1_df = df_long[df_long['selection'].isin(['cases', 'deaths'])]
   return task1_df
 
-task1_df = load_data3()    
+task1_df = load_data3()   
+
+def load_data4():
+    from vega_datasets import data
+    source = alt.topo_feature(data.us_10m.url, "states")
+    return source
+
+source = load_data4()  
 
 ### Title ###
 
@@ -152,9 +159,6 @@ st.write("### How does COVID-19’s geographical distribution regarding cases an
 df_wide['date'] = pd.to_datetime(df_wide['date'])
 date = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
 subset = df_wide[df_wide["date"] == date]
-
-from vega_datasets import data
-source = alt.topo_feature(data.us_10m.url, "states")
 
 width = 600
 height  = 300
