@@ -159,7 +159,7 @@ st.write("### How does COVID-19’s geographical distribution regarding cases an
 
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
-date_selection = st.slider("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
+date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
 subset = df_wide[df_wide["date"] == date_selection]
 
 width = 600
@@ -188,7 +188,7 @@ chart_base = alt.Chart(source
     ).add_selection(selector
     ).transform_lookup(
         lookup="id",
-        from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
+        from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date_selection','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
     )
 
 rate_scale = alt.Scale(domain=[df_wide['case_fatality_rate'].max(), df_wide['case_fatality_rate'].min()], scheme='inferno')
