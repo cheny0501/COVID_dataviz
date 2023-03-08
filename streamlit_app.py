@@ -172,7 +172,7 @@ start_time = st.slider(
 
 subset = df_wide[df_wide["date"] == start_time]
 
-#st.write("Start time:", start_time)
+st.write("You are viewing the data for this date: ", start_time)
 
 width = 600
 height  = 300
@@ -210,14 +210,14 @@ vac_color = alt.Color(field="total_vaccinations_per_hundred", type="quantitative
 
 chart_rate = chart_base.mark_geoshape().encode(
     color=rate_color,
-    tooltip=['case_fatality_rate:Q', 'state:N','cases:Q','deaths:Q','date:T']
+    tooltip=['case_fatality_rate:Q', 'state:N','cases:Q','deaths:Q']
     ).transform_filter(
     selector
     )
    
 chart_vac = chart_base.mark_geoshape().encode(
     color=vac_color,
-    tooltip=['total_vaccinations_per_hundred:Q','state:N','date:T']
+    tooltip=['total_vaccinations_per_hundred:Q','state:N']
     ).transform_filter(
     selector
     )
