@@ -88,9 +88,9 @@ st.write("#### The trend of COVID-19 cases and deaths in the US over the year of
 chart = alt.Chart(df_task1).mark_area(color = 'green',
                            opacity = 0.5,
                            line = {'color':'darkgreen'}).encode(
-    x='date:T',
+    x=alt.X('date:T',legend=alt.Legend(title='Population Count')),
     y="count:Q",
-    color="selection:N",
+    color=alt.Color("selection:N",legend=alt.Legend(title='Cases/Deaths')),
     row="selection:N",
     tooltip=["date:T", "count:Q"]
 ).resolve_scale(y='independent')
