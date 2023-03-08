@@ -78,7 +78,7 @@ source = load_data3()
 
 ### Title ###
 
-text_0 = "Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021"
+text_0 = "Visualizing the Impact of COVID-19 and the Vaccination Data in 2021"
 st.write(f'<div style="text-align: center; font-size: 42px">{text_0}</div>', unsafe_allow_html=True)
 #st.write("## Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021")
 
