@@ -192,7 +192,7 @@ background = alt.Chart(source
 selector = alt.selection_multi(
     #on='click'
     #empty='all', fields=['id']
-    #fields=["state"]
+    fields=["id"]
     )
 
 chart_base = alt.Chart(source
