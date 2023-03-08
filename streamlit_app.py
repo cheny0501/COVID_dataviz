@@ -88,7 +88,7 @@ st.write(f'<div style="text-align: right; font-size: 24px">{text_1}</div>', unsa
 st.write(f'<div style="text-align: right; font-size: 24px">{text_2}</div>', unsafe_allow_html=True)
 
 st.write("Please note:")
-st.write("  1. All visualizations presented below use data from Jan. 12nd, 2021 to Dec. 30th, 2021. ")
+st.write("  1. All visualizations presented below are built on data from Jan. 12nd, 2021 to Dec. 30th, 2021. ")
 st.write("  2. Case Fatality Rate for COVID-19 is calculated as the number of deaths from COVID-19 divided by the number of confirmed cases of COVID-19.")
 
 #### Task1 ###
