@@ -166,7 +166,7 @@ subset = df_wide[df_wide["date"] == date_selection]
 
 start_time = st.slider(
     "When do you start?",
-    value=datetime(2021, 1, 12, 0, 0),
+    value=datetime(2021, 1, 12, 9, 30),
     max_value = datetime(2021,12,30,23,59),
     format="MM/DD/YY - hh:mm")
 st.write("Start time:", start_time)
