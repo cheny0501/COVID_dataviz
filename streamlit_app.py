@@ -96,7 +96,7 @@ chart = alt.Chart(subset_1).mark_area(color = 'green',
     y=alt.Y("count:Q",axis=alt.Axis(title='Population Count')),
     color=alt.Color("selection:N",legend=alt.Legend(title='Cases/Deaths')),
     row="selection:N",
-    tooltip=["date:T", "count:Q"]
+    tooltip=["date:T", "count:Q","state:N"]
 ).resolve_scale(y='independent')
 
 # Render the chart using the altair renderer
