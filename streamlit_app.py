@@ -78,14 +78,17 @@ source = load_data3()
 
 ### Title ###
 
-st.write("## Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021")
+text_0 = "Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021"
+st.write(f'<div style="text-align: center; font-size: 48px">{text_0}</div>', unsafe_allow_html=True)
+#st.write("## Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021")
 
 text_1 = "Group: Viz or DY"
+text_2 = "Members: Tony Ding, Chen Yang"
 st.write(f'<div style="text-align: right; font-size: 24px">{text_1}</div>', unsafe_allow_html=True)
+st.write(f'<div style="text-align: right; font-size: 24px">{text_2}</div>', unsafe_allow_html=True)
 
-
-st.write("#### Group: Viz or DY")
-st.write("#### Members: Tony Ding, Chen Yang")
+#st.write("#### Group: Viz or DY")
+#st.write("#### Members: Tony Ding, Chen Yang")
 
 #### Task1 ###
 st.write("#### The trend of COVID-19 cases and deaths in the US over the year of 2021")
