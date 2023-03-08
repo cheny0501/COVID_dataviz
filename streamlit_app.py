@@ -71,8 +71,7 @@ def load_data3():
 task1_df = load_data3()   
 
 def load_data4():
-    data_path = "data/us_10m.json"
-    source = alt.topo_feature(data.path, "states")
+    source = alt.topo_feature(data.us_10m.url, "states")
     return source
 
 source = load_data4()  
