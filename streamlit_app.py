@@ -159,7 +159,7 @@ st.write("### How does COVID-19’s geographical distribution regarding cases an
 
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
-date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
+date_selection = st.slider("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
 subset = df_wide[df_wide["date"] == date_selection]
 
 width = 600
