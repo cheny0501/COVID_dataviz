@@ -78,7 +78,7 @@ source = load_data3()
 
 ### Title ###
 
-st.write("## Visualizing the Impact of COVID-19")
+st.write("## Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021")
 st.write("#### Group: Viz or DY")
 st.write("#### Tony Ding, Chen Yang")
 
@@ -189,7 +189,7 @@ background = alt.Chart(source
     height=height
 ).project(project)
 
-selector = alt.selection_single(
+selector = alt.selection_multi(
     on='click'
     #empty='all', fields=['id']
     )
