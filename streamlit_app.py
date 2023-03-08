@@ -83,7 +83,7 @@ st.write("#### Group: Viz or DY")
 st.write("#### Tony Ding, Chen Yang")
 
 #### Task1 ###
-st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time in the US?")
+st.write("#### The trend of COVID-19 cases and deaths in the US over the year of 2021")
 # Create the chart
 chart = alt.Chart(df_task1).mark_area(color = 'green',
                            opacity = 0.5,
@@ -100,7 +100,7 @@ st.altair_chart(chart)
 
 #### Task2 ####
 
-st.write("#### Task2: How do vaccinations administered total/per state/per region impact the spread of COVID-19?")
+st.write("#### Task2: COVID-19 vaccinations and their impact on case fatality rate in US over the year of 2021")
 # create a drop-down state selector
 state = st.selectbox("Please select a state:",df_wide['state'].unique())
 subset = df_wide[df_wide["state"] == state]
@@ -158,7 +158,7 @@ st.altair_chart(chart1)
 
 from datetime import datetime
 
-st.write("### How does COVID-19’s geographical distribution regarding cases and deaths differ among states? How do the vaccination statuses vary among states?")
+st.write("### COVID-19’s geographical distribution in US regarding cases, deaths, and vaccination administered per hundred people over time in 2021")
 
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
