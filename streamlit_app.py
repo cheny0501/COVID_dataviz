@@ -164,6 +164,13 @@ df_wide['date'] = pd.to_datetime(df_wide['date'])
 date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
 subset = df_wide[df_wide["date"] == date_selection]
 
+start_time = st.slider(
+    "When do you start?",
+    value=datetime(2021, 1, 12, 0, 0),
+    max_value = datetime(2021,12,30,23,59),
+    format="MM/DD/YY - hh:mm")
+st.write("Start time:", start_time)
+
 width = 600
 height  = 300
 project = 'albersUsa'
