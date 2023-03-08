@@ -175,7 +175,7 @@ subset = df_wide[df_wide["date"] == start_time]
 
 #st.write("You are viewing the data for this date: ", start_time)
 
-width = 800
+width = 600
 height  = 400
 project = 'albersUsa'
 
