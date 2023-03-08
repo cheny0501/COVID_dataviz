@@ -189,8 +189,8 @@ background = alt.Chart(source
     height=height
 ).project(project)
 
-selector = alt.selection_single(
-    on='click'
+selector = alt.selection_multi(
+    #on='click'
     #empty='all', fields=['id']
     #fields=["state"]
     )
