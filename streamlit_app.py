@@ -12,7 +12,18 @@ def load_data1():
     # read data
     df_case = pd.read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-2021.csv")
     df_vac = pd.read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/us_state_vaccinations.csv")
-  
+    # groupby cases and deaths for same date
+    df_task1 = df_task1.groupby(['date']).agg({'cases': 'sum', 'deaths': 'sum'})
+    df_task1 = df_task1.reset_index()
+    df_task1 = df_task1.melt(id_vars=['date'], value_vars=['cases', 'deaths'], var_name='selection', value_name='value')
+    
+    return df_task1
+
+df_task1 = load_data1()
+    
+    
+def load_data2():
+    
     # start from 2021-01-12
     # since the record for df_vac began from 2021-01-12
     df_case = df_case[df_case['date'] > '2021-01-11']
@@ -56,27 +67,13 @@ def load_data1():
     
     return df_wide
 
-df_wide = load_data1()
-
-def load_data2():
-# change df to long
-    df_long = df_wide.melt(id_vars=['date', 'state'], value_vars=['cases', 'deaths', 'total_vaccinations', 'total_vaccinations_per_hundred', 'case_fatality_rate'], var_name='selection')
-    
-    return df_long
-
-df_long = load_data2()    
+df_wide = load_data2() 
 
 def load_data3():
-  task1_df = df_long[df_long['selection'].isin(['cases', 'deaths'])]
-  return task1_df
-
-task1_df = load_data3()   
-
-def load_data4():
     source = alt.topo_feature(data.us_10m.url, "states")
     return source
 
-source = load_data4()  
+source = load_data3()  
 
 ### Title ###
 
@@ -87,7 +84,7 @@ st.write("#### Tony Ding, Chen Yang")
 #### Task1 ###
 st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time in the US?")
 # Create the chart
-chart = alt.Chart(task1_df).mark_area(color = 'green',
+chart = alt.Chart(df_task1).mark_area(color = 'green',
                            opacity = 0.5,
                            line = {'color':'darkgreen'}).encode(
     x='date:T',
