@@ -1,6 +1,7 @@
 import altair as alt
 import pandas as pd
 import streamlit as st
+from vega_datasets import data
 
 # Data pre-processing and load data
 
@@ -70,7 +71,6 @@ def load_data3():
 task1_df = load_data3()   
 
 def load_data4():
-    from vega_datasets import data
     source = alt.topo_feature(data.us_10m.url, "states")
     return source
 
