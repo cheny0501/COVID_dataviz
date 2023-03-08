@@ -102,7 +102,13 @@ st.altair_chart(chart)
 
 st.write("#### COVID-19 vaccinations and their impact on case fatality rate in US over the year of 2021")
 # create a drop-down state selector
-state = st.selectbox("Please select a state:",df_wide['state'].unique())
+#state = st.selectbox("Please select a state:",df_wide['state'].unique())
+
+state = st.multiselect("States",df_wide['state'].unique(),[
+    "California",
+    "Florida",
+])
+
 subset = df_wide[df_wide["state"] == state]
 
 #state_dropdown = alt.binding_select(options=state)
