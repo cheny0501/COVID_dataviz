@@ -132,7 +132,7 @@ base_2 = alt.Chart(subset).properties(
   x=alt.X('date:T', axis=alt.Axis(title='Date')),
   y=alt.Y('total_vaccinations:Q', axis=alt.Axis(title='Total Vaccinations')),
   color='state',
-  tooltip=['date:T','total_vaccinations:Q']
+  tooltip=['date:T','total_vaccinations:Q','state:N']
 ).properties(
     title='Total Vaccinations over the year of 2021'
 )
@@ -144,7 +144,7 @@ upper = base.mark_line(point=True).encode(
     alt.X('date:T',scale=alt.Scale(domain=brush),axis=alt.Axis(title='Date')),
     y =alt.Y('case_fatality_rate:Q',axis=alt.Axis(title='Case Fatality Rate')),
     color = alt.Color('state',legend=alt.Legend(title='States')),
-    tooltip = ["date:T","case_fatality_rate:Q"]
+    tooltip = ["date:T","case_fatality_rate:Q",'state:N']
 ).transform_filter(
     brush
 )
