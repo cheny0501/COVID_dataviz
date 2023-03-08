@@ -19,6 +19,8 @@ def load_data1():
     df_vac = df_vac[[ "date", "location","total_vaccinations", "total_vaccinations_per_hundred" ]]
     # rename to be consistent for merging
     df_vac = df_vac.rename(columns={"location": "state"})
+    # change new york
+    df_vac['state'] = df_vac['state'].str.replace('New York State', 'New York')
     # merge the two datasets
     df1 = df_case.merge(df_vac, on=['date', 'state'], how='left')
     # drop all missing values
@@ -32,6 +34,22 @@ def load_data1():
     # Add the mortality rates as a new column to the original DataFrame
     df1['case_fatality_rate'] = df1.set_index(['state', 'date']).index.map(case_fatality_rate.get)
     df_wide = df1
+    state_abbreviations = {
+    'Alabama': '1', 'Alaska': '2', 'Arizona': '4', 'Arkansas': '5', 'California': '6', 
+    'Colorado': '8', 'Connecticut': '9', 'Delaware': '10', 'District of Columbia':'11', 'Florida': '12', 'Georgia': '13', 
+    'Hawaii': '15', 'Idaho': '16', 'Illinois': '17', 'Indiana': '18', 'Iowa': '19', 
+    'Kansas': '20', 'Kentucky': '21', 'Louisiana': '22', 'Maine': '23', 'Maryland': '24', 
+    'Massachusetts': '25', 'Michigan': '26', 'Minnesota': '27', 'Mississippi': '28', 
+    'Missouri': '29', 'Montana': '30', 'Nebraska': '31', 'Nevada': '32', 'New Hampshire': '33', 
+    'New Jersey': '34', 'New Mexico': '35', 'New York': '36', 'North Carolina': '37', 
+    'North Dakota': '38', 'Ohio': '39', 'Oklahoma': '40', 'Oregon': '41', 'Pennsylvania': '42', 
+    'Rhode Island': '44', 'South Carolina': '45', 'South Dakota': '46', 'Tennessee': '47', 
+    'Texas': '48', 'Utah': '49', 'Vermont': '50', 'Virginia': '51', 'Washington': '53', 
+    'West Virginia': '54', 'Wisconsin': '55', 'Wyoming': '56', "Puerto Rico":'72'
+    }
+
+    # Use the dictionary to create a new column with the state abbreviations
+    df_wide['id'] = df_wide['state'].map(state_abbreviations)
     
     return df_wide
 
@@ -135,24 +153,60 @@ df_wide['date'] = pd.to_datetime(df_wide['date'])
 date = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
 subset = df_wide[df_wide["date"] == date]
 
-### P2.2 ###
-# replace with st.radio
-selection = st.radio("selection", ("cases", "deaths","total_vaccinations","total_vaccinations_per_hundred","case_fatality_rate"))
-subset = subset[subset["selection"] == selection]
+from vega_datasets import data
+source = alt.topo_feature(data.us_10m.url, "states")
 
+width = 600
+height  = 300
+project = 'albersUsa'
 
-### P2.3 ###
-# replace with st.multiselect
-default = [
-    "California",
-    "Gerogia",
-]
-states = st.multiselect('states', subset["states"].unique(), default)
-subset = subset[subset["states"].isin(states)]
+# a gray map using as the visualization background
+background = alt.Chart(source
+).mark_geoshape(
+    fill='#aaa',
+    stroke='white'
+).properties(
+    width=width,
+    height=height
+).project(project)
+##############
+selector = alt.selection_single(
+    on='click'
+    )
 
-chart = alt.Chart(subset).mark_rect().encode(
-    x=alt.X("date:T"),
-    y=alt.Y("states:N"),
-    color=alt.Color("case_fatality_rate", legend=alt.Legend(title="case_fatality_rate")),
-    tooltip=["case_fatality_rate"],
+chart_base = alt.Chart(source
+    ).properties( 
+        width=width,
+        height=height
+    ).project(project
+    ).add_selection(selector
+    ).transform_lookup(
+        lookup="id",
+        from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
+    )
+
+rate_scale = alt.Scale(domain=[subset['case_fatality_rate'].max(), subset['case_fatality_rate'].min()], scheme='inferno')
+rate_color = alt.Color(field="case_fatality_rate", type="quantitative", scale=rate_scale)
+vac_scale = alt.Scale(domain=[subset['total_vaccinations_per_hundred'].max(), subset['total_vaccinations_per_hundred'].min()], scheme='Viridis')
+vac_color = alt.Color(field="total_vaccinations_per_hundred", type="quantitative", scale=vac_scale)
+
+chart_rate = chart_base.mark_geoshape().encode(
+    color=rate_color,
+    tooltip=['case_fatality_rate:Q', 'state:N','cases:Q','deaths:Q']
+    ).transform_filter(
+    selector
+    )
+   
+### heatmap
+chart_vac = chart_base.mark_geoshape().encode(
+    color=vac_color,
+    tooltip=['total_vaccinations_per_hundred:Q','state:N']
+    ).transform_filter(
+    selector
+    )
+
+chart2 = alt.vconcat(background + chart_rate, background + chart_vac
+).resolve_scale(
+    color='independent'
 )
+st.altair_chart(chart2)
