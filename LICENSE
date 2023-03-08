@@ -10,8 +10,8 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
 In light of the current public health emergency, we did this project for detecting
-the pattern of COVID-19. The datasets are from the New York Times Company. They
-providing this database under the following free-of-cost, perpetual,
+the pattern of COVID-19. The datasets are from the New York Times. They
+provided these datasets under the following free-of-cost, perpetual,
 non-exclusive license. Anyone may copy, distribute, and display the database, or
 any part thereof, and make derivative works based on it, provided  (a) any such
 use is for non-commercial purposes only and (b) credit is given to The New York
@@ -21,7 +21,8 @@ in or derived from the database.
   
 By accessing or copying any part of the database, the user accepts the terms of
 this license. Anyone seeking to use the database for other purposes is required
-to contact The Chen Yang at cyang1@hsph.harvard.edu to obtain permission. 
+to contact Chen Yang at cyang1@hsph.harvard.edu or Tony Ding at xiayiding@hsph.harvard.edu
+to obtain permission. 
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
