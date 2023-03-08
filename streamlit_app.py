@@ -3,6 +3,8 @@ import pandas as pd
 import streamlit as st
 from vega_datasets import data
 
+alt.data_transformers.disable_max_rows()
+
 # Data pre-processing and load data
 
 @st.cache
