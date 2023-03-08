@@ -87,7 +87,7 @@ st.write("#### Tony Ding, Chen Yang")
 #### Task1 ###
 st.write("#### Task1: What’s the trend of COVID-19 cases and deaths over time in the US?")
 # Create the chart
-chart = alt.Chart(task1_df).mark_line().encode(
+chart = alt.Chart(task1_df).mark_line('basis').encode(
     x='date:T',
     y="value:Q",
     color="selection:N",
@@ -188,7 +188,7 @@ chart_base = alt.Chart(source
     ).add_selection(selector
     ).transform_lookup(
         lookup="id",
-        from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date_selection','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
+        from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
     )
 
 rate_scale = alt.Scale(domain=[df_wide['case_fatality_rate'].max(), df_wide['case_fatality_rate'].min()], scheme='inferno')
