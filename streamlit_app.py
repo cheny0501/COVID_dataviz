@@ -165,14 +165,14 @@ date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_valu
 
 start_time = st.slider(
     "Choose a date:",
-    min_value = datetime(2021,1,12,9,0),
-    max_value = datetime(2021,12,30,9,0),
-    value=datetime(2021, 7, 10, 9, 0),
+    min_value = datetime(2021,1,12,0,0),
+    max_value = datetime(2021,12,30,0,0),
+    value=datetime(2021, 7, 10, 0, 0),
     format="MM/DD/YY")
 
 subset = df_wide[df_wide["date"] == start_time]
 
-st.write("You are viewing the data for this date: ", start_time)
+#st.write("You are viewing the data for this date: ", start_time)
 
 width = 600
 height  = 300
@@ -210,14 +210,14 @@ vac_color = alt.Color(field="total_vaccinations_per_hundred", type="quantitative
 
 chart_rate = chart_base.mark_geoshape().encode(
     color=rate_color,
-    tooltip=['case_fatality_rate:Q', 'state:N','cases:Q','deaths:Q','date:T']
+    tooltip=['case_fatality_rate:Q', 'state:N','cases:Q','deaths:Q']
     ).transform_filter(
     selector
     )
    
 chart_vac = chart_base.mark_geoshape().encode(
     color=vac_color,
-    tooltip=['total_vaccinations_per_hundred:Q','state:N','date:T']
+    tooltip=['total_vaccinations_per_hundred:Q','state:N']
     ).transform_filter(
     selector
     )
