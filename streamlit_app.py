@@ -189,9 +189,7 @@ chart_base = alt.Chart(source
     ).transform_lookup(
         lookup="id",
         from_=alt.LookupData(subset, "id", ['case_fatality_rate','state','date','total_vaccinations','total_vaccinations_per_hundred','cases','deaths']),
-    ).add_selection(date_selection
-).transform_filter(date_selection
-)
+    )
 
 rate_scale = alt.Scale(domain=[df_wide['case_fatality_rate'].max(), df_wide['case_fatality_rate'].min()], scheme='inferno')
 rate_color = alt.Color(field="case_fatality_rate", type="quantitative", scale=rate_scale)
