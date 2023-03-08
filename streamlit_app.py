@@ -85,7 +85,11 @@ st.write("#### Tony Ding, Chen Yang")
 #### Task1 ###
 st.write("#### The trend of COVID-19 cases and deaths in the US over the year of 2021")
 # Create the chart
-chart = alt.Chart(df_task1).mark_area(color = 'green',
+
+state_1 = st.selectbox("Please select a state:",df_task1['state'].unique())
+subset_1 = df_task1[df_task1["state"] == state_1]
+
+chart = alt.Chart(subset_1).mark_area(color = 'green',
                            opacity = 0.5,
                            line = {'color':'darkgreen'}).encode(
     x=alt.X('date:T',axis=alt.Axis(title='Date')),
