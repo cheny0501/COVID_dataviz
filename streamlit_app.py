@@ -125,7 +125,8 @@ base_2 = alt.Chart(subset).properties(
 ).encode(
   x=alt.X('date:T', axis=alt.Axis(title='Date')),
   y=alt.Y('total_vaccinations:Q', axis=alt.Axis(title='Total Vaccinations')),
-  color='state'
+  color='state',
+  tooltip=['date:T','total_vaccinations:Q']
 ).properties(
     title='Total Vaccinations over the year of 2021'
 )
@@ -161,7 +162,7 @@ st.write("### How does COVID-19’s geographical distribution regarding cases an
 
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
-date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
+#date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
 
 start_time = st.slider(
     "Choose a date:",
@@ -189,8 +190,8 @@ background = alt.Chart(source
 ).project(project)
 
 selector = alt.selection_single(
-    #on='click'
-    empty='all', fields=['id']
+    on='click'
+    #empty='all', fields=['id']
     )
 
 chart_base = alt.Chart(source
