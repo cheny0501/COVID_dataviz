@@ -88,7 +88,7 @@ st.write("#### The trend of COVID-19 cases and deaths in the US over the year of
 chart = alt.Chart(df_task1).mark_area(color = 'green',
                            opacity = 0.5,
                            line = {'color':'darkgreen'}).encode(
-    x=alt.X('date:T',axis=alt.Axis(title='????????')),
+    x=alt.X('date:T',axis=alt.Axis(title='Date')),
     y=alt.Y("count:Q",axis=alt.Axis(title='Population Count')),
     color=alt.Color("selection:N",legend=alt.Legend(title='Cases/Deaths')),
     row="selection:N",
