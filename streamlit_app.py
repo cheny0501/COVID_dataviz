@@ -118,8 +118,8 @@ st.write("#### COVID-19 vaccinations and their impact on case fatality rate in U
 #state = st.selectbox("Please select a state:",df_wide['state'].unique())
 
 state = st.multiselect("States",df_wide['state'].unique(),[
-    "California",
     "Florida",
+    "Georgia",
     "Massachusetts",
     "New York",
     "Texas",
