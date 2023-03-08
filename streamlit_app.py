@@ -107,6 +107,9 @@ st.write("#### COVID-19 vaccinations and their impact on case fatality rate in U
 state = st.multiselect("States",df_wide['state'].unique(),[
     "California",
     "Florida",
+    "Massachusetts",
+    "New York",
+    "Texas",
 ])
 
 subset = df_wide[df_wide["state"].isin(state)]
