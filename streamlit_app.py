@@ -91,7 +91,7 @@ st.write(f'<div style="text-align: right; font-size: 24px">{text_2}</div>', unsa
 #st.write("#### Members: Tony Ding, Chen Yang")
 
 #### Task1 ###
-st.write("#### The trend of COVID-19 cases and deaths in the US over the year of 2021")
+st.write("#### The trend of COVID-19 cases and deaths in the US over the year of 2021:")
 # Create the chart
 
 state_1 = st.selectbox("Please select a state:",df_task1['state'].unique())
@@ -112,7 +112,7 @@ st.altair_chart(chart)
 
 #### Task2 ####
 
-st.write("#### COVID-19 vaccinations and their impact on case fatality rate in US over the year of 2021")
+st.write("#### COVID-19 vaccinations and their impact on case fatality rate in US over the year of 2021:")
 # create a drop-down state selector
 #state = st.selectbox("Please select a state:",df_wide['state'].unique())
 
@@ -179,7 +179,7 @@ st.altair_chart(chart1)
 
 from datetime import datetime
 
-st.write("### COVID-19’s geographical distribution in US regarding cases, deaths, and vaccination administered per hundred people over time in 2021")
+st.write("#### COVID-19’s geographical distribution in US regarding cases, deaths, and vaccination administered per hundred people over time in 2021:")
 
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
