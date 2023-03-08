@@ -81,7 +81,7 @@ source = load_data3()
 st.write("## Visualizing the Impact of COVID-19 and the Vaccination Statuses in 2021")
 
 text_1 = "Group: Viz or DY"
-st.write(f'<div style="text-align: right">{text_1}</div>', unsafe_allow_html=True)
+st.write(f'<div style="text-align: right; font-size: 24px">{text_1}</div>', unsafe_allow_html=True)
 
 
 st.write("#### Group: Viz or DY")
