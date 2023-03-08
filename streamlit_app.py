@@ -153,7 +153,7 @@ lower = lower.properties(
 chart1 = upper & lower
 st.altair_chart(chart1)
 
-### Task 3 & 4 ###
+### Task 3 ###
 
 from datetime import datetime
 
@@ -162,16 +162,17 @@ st.write("### How does COVID-19’s geographical distribution regarding cases an
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
 date_selection = st.date_input("Date", min_value=df_wide["date"].min(), max_value=df_wide["date"].max(), value=df_wide["date"].min())
-subset = df_wide[df_wide["date"] == date_selection]
 
 start_time = st.slider(
-    "When do you start?",
+    "Choose a date:",
     min_value = datetime(2021,1,12,0,0),
     max_value = datetime(2021,12,30,0,0),
     value=datetime(2021, 1, 12, 0, 0),
     format="MM/DD/YY")
 
-st.write("Start time:", start_time)
+subset = df_wide[df_wide["date"] == start_time]
+
+#st.write("Start time:", start_time)
 
 width = 600
 height  = 300
