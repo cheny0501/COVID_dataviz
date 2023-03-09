@@ -179,7 +179,7 @@ st.altair_chart(chart1)
 
 from datetime import datetime
 
-st.write("#### COVID-19’s geographical distribution in US regarding cases, deaths, and vaccination administered per hundred people over time in 2021:")
+st.write("#### Geographical distribution of COVID-19 cases, deaths, and vaccinations administered per hundred in the US throughout 2021:")
 
 # replace with st.slider
 df_wide['date'] = pd.to_datetime(df_wide['date'])
