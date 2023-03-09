@@ -23,6 +23,7 @@ df_task1 = load_data1()
     
     
 def load_data2():
+    df_case = pd.read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-2021.csv")
     df_vac = pd.read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/us_state_vaccinations.csv")
     # start from 2021-01-12
     # since the record for df_vac began from 2021-01-12
