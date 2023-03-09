@@ -189,7 +189,7 @@ start_time = st.slider(
     "Choose a date:",
     min_value = datetime(2021,1,12,0,0),
     max_value = datetime(2021,12,30,0,0),
-    value=datetime(2021, 7, 4, 0, 0),
+    value=datetime(2021, 7, 2, 0, 0),
     format="MM/DD/YY")
 
 subset = df_wide[df_wide["date"] == start_time]
