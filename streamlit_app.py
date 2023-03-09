@@ -16,6 +16,7 @@ def load_data1():
     df_task1 = df_case.groupby(['date','state']).agg({'cases': 'sum', 'deaths': 'sum'})
     df_task1 = df_task1.reset_index()
     df_task1 = df_task1.melt(id_vars=['date','state'], value_vars=['cases', 'deaths'], var_name='selection', value_name='count')
+    df_task1 = df_task1[df_task1['date'] > '2021-01-11']
     
     return df_task1
 
