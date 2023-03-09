@@ -1,4 +1,4 @@
-# BMI706 Final Project
+# BMI-706 Final Project
 
 -By Tony Ding (xiayiding@hsph.harvard.edu) and Chen Yang (cyang1@hsph.harvard.edu)
 
